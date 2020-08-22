@@ -54,6 +54,7 @@ function getMovie(){
       <div class="col-md-8">
         <h4>${movie.Title+ ' (' + movie.Year+ ')'}</h4>
         <ul class="list-group">
+        <li class="list-group-item"> ${movie.Plot}</li>
           <li class="list-group-item"<strong>Cast: </strong> ${movie.Actors}</li>
           <li class="list-group-item"<strong>Directed: </strong> ${movie.Director}</li>
           <li class="list-group-item"<strong>Awards: </strong> ${movie.Awards}</li>
@@ -62,9 +63,7 @@ function getMovie(){
     </div>
     <div class="row">
       <div class="well">
-        <h4>Plot</h4>
-        ${movie.Plot}
-        <hr>
+      <hr>
         <a href="http://imdb.com/title/${movie.imdbID}" target="blank" class="btn btn-primary"> View IMDB </a>
         <a href="index.html" class="btn btn-default">Back to Search </a>
       </div>
