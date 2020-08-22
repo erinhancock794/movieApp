@@ -1,5 +1,5 @@
 
-const apiKey = '?i=tt3896198&apikey=2165774a';
+const apiKey = '?apikey=2165774a';
 
 $(document).ready(() => {
   $('#searchForm').on('submit', (e) => {
@@ -40,11 +40,37 @@ function movieSelected(id){
   return false;
 } 
 
-function getMovie(id){
+function getMovie(){
   let movieId = sessionStorage.getItem('movieId');
-  axios.get(`http://www.omdbapi.com${apiKey}&i=${movieId}`)
+  axios.get(`http://www.omdbapi.com${apiKey}&i=${movieId}`) //tt0099785
   .then((response) => {
-    console.log(response);
+    console.log(response.data)
+    let movie = response.data;
+    let output = `
+    <div class="row">
+      <div class = "col-md-4">
+        <img src="${movie.Poster}" class="thumbnail">
+      </div>
+      <div class="col-md-8">
+        <h4>${movie.Title+ ' (' + movie.Year+ ')'}</h4>
+        <ul class="list-group">
+          <li class="list-group-item"<strong>Cast: </strong> ${movie.Actors}</li>
+          <li class="list-group-item"<strong>Directed: </strong> ${movie.Director}</li>
+          <li class="list-group-item"<strong>Awards: </strong> ${movie.Awards}</li>
+          <li class="list-group-item"<strong>Rated: </strong> ${movie.Rated}</li>
+      </div>
+    </div>
+    <div class="row">
+      <div class="well">
+        <h4>Plot</h4>
+        ${movie.Plot}
+        <hr>
+        <a href="http://imdb.com/title/${movie.imdbID}" target="blank" class="btn btn-primary"> View IMDB </a>
+        <a href="index.html" class="btn btn-default">Back to Search </a>
+      </div>
+    </div>
+    `;
+    $('#movie').html(output);
   
   })
   .catch((error) => {
